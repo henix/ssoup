@@ -25,6 +25,10 @@ lazy val root = project.in(file(".")).dependsOn(macros % "compile-internal, test
 )
 
 libraryDependencies ++= Seq(
+  "org.jsoup" % "jsoup" % "1.8.1"
+)
+
+libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "2.2.3" % "test"
 )
 
