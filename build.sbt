@@ -17,7 +17,9 @@ lazy val macros = project.in(file("macros")).settings(
   publishLocal := {}
 )
 
-lazy val root = project.in(file(".")).dependsOn(macros).settings(
+// http://grokbase.com/t/gg/simple-build-tool/133shekp07/sbt-avoid-dependence-in-a-macro-based-project
+
+lazy val root = project.in(file(".")).dependsOn(macros % "compile-internal, test-internal").settings(
   mappings in (Compile, packageBin) ++= mappings.in(macros, Compile, packageBin).value,
   mappings in (Compile, packageSrc) ++= mappings.in(macros, Compile, packageSrc).value
 )
