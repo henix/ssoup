@@ -1,5 +1,11 @@
 # ssoup: Scala CSS Selector DSL based on jsoup
 
+## Install
+
+```
+"info.henix" % "ssoup" % "0.1"
+```
+
 ## Example
 
 ```scala

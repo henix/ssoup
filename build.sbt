@@ -1,6 +1,8 @@
+organization in Global := "info.henix"
+
 name := "ssoup"
 
-organization in Global := "henix"
+description := "Scala CSS Selector DSL based on jsoup"
 
 version in Global := "0.1"
 
@@ -24,5 +26,36 @@ libraryDependencies ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "2.2.2" % "test"
+  "org.scalatest" %% "scalatest" % "2.2.3" % "test"
+)
+
+useGpg := true
+
+publishTo := {
+  val nexus = "https://oss.sonatype.org/"
+  if (isSnapshot.value)
+    Some("snapshots" at nexus + "content/repositories/snapshots")
+  else
+    Some("releases" at nexus + "service/local/staging/deploy/maven2")
+}
+
+publishMavenStyle := true
+
+publishArtifact in Test := false
+
+pomIncludeRepository := { _ => false }
+
+pomExtra := (
+  <url>https://github.com/henix/ssoup</url>
+  <scm>
+    <url>git@github.com:henix/ssoup.git</url>
+    <connection>scm:git:git@github.com:henix/ssoup.git</connection>
+  </scm>
+  <developers>
+    <developer>
+      <id>henix</id>
+      <name>henix</name>
+      <url>https://github.com/henix</url>
+    </developer>
+  </developers>
 )
