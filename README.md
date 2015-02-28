@@ -3,7 +3,7 @@
 ## Install
 
 ```
-"info.henix" % "ssoup" % "0.1"
+"info.henix" % "ssoup" % "0.2"
 ```
 
 ## Example

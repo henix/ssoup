@@ -4,7 +4,7 @@ name := "ssoup"
 
 description := "Scala CSS Selector DSL based on jsoup"
 
-version in Global := "0.1"
+version in Global := "0.2"
 
 licenses in Global := Seq("3-clause BSD" -> url("http://opensource.org/licenses/BSD-3-Clause"))
 
@@ -31,8 +31,6 @@ libraryDependencies ++= Seq(
 libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "2.2.3" % "test"
 )
-
-useGpg := true
 
 publishTo := {
   val nexus = "https://oss.sonatype.org/"

@@ -23,27 +23,11 @@ object Selectors {
   private val combiningEvaluatorClass = Class.forName("org.jsoup.select.CombiningEvaluator")
   private val andClass = Class.forName("org.jsoup.select.CombiningEvaluator$And")
 
-  val isIdEvaluator = Memoize1 { (ev: Evaluator) =>
-    ev match {
-      case _: Evaluator.Id => true
-      case andev if andClass.isInstance(andev) =>
-        val evaluatorsField = combiningEvaluatorClass.getDeclaredField("evaluators")
-        evaluatorsField.setAccessible(true)
-        val evaluators = evaluatorsField.get(andev).asInstanceOf[util.ArrayList[Evaluator]]
-        evaluators.asScala.exists(_.isInstanceOf[Evaluator.Id])
-      case _ => false
-    }
-  }
-
   /**
    * @param evaluator must not contain structural selector
    */
   private def filterByEvaluator(evaluator: Evaluator, eles: Iterator[Element]): Iterator[Element] = {
-    val it = eles.filter(e => evaluator.matches(e, e))
-    if (isIdEvaluator(evaluator)) // optimize #id, find only the first one
-      it.take(1)
-    else
-      it
+    eles.filter(e => evaluator.matches(e, e))
   }
 
   implicit def cssquery(css: String): Evaluator = QueryParser.parse(css)
