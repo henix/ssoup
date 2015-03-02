@@ -29,8 +29,12 @@ libraryDependencies ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "2.2.3" % "test"
+  "com.storm-enroute" %% "scalameter" % "0.6" % "test"
 )
+
+testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework")
+
+parallelExecution in Test := false
 
 publishTo := {
   val nexus = "https://oss.sonatype.org/"

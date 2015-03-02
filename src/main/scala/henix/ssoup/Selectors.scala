@@ -20,9 +20,6 @@ object QueryParser {
 
 object Selectors {
 
-  private val combiningEvaluatorClass = Class.forName("org.jsoup.select.CombiningEvaluator")
-  private val andClass = Class.forName("org.jsoup.select.CombiningEvaluator$And")
-
   /**
    * @param evaluator must not contain structural selector
    */
