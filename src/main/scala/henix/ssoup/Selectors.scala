@@ -145,5 +145,5 @@ object Selectors {
     }
   }
 
-  def buildIdCache(el: Element): Map[String, Element] = dfsTraverse(el).collect({ case e if e.hasAttr("id") => e }).map(e => e.id() -> e).toMap
+  def buildIdCache(el: Element): Map[String, Element] = dfsTraverse(el).filter(_.hasAttr("id")).map(e => e.id() -> e).toMap
 }
