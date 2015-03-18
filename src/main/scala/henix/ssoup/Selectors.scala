@@ -76,7 +76,7 @@ object Selectors {
 
     def +(eval: Evaluator): Iterator[Element] = filterByEvaluator(eval, getSiblings(element).take(1))
 
-    def |>>(eval: Evaluator): Iterator[Element] = filterByEvaluator(eval, new BFSElementIterator(element))
+    def |>>(eval: Evaluator): Iterator[Element] = filterByEvaluator(eval, bfsTraverse(element))
   }
 
   /**
@@ -110,7 +110,36 @@ object Selectors {
 
   def getSiblings(e: Element): Iterator[Element] = getSiblingNodes(e).collect({ case e: Element => e })
 
-  def dfsTraverse(e: Element): Iterator[Element] = Iterator.single(e) ++ getChilds(e).flatMap(dfsTraverse)
+  /**
+   * Pre-order DFS: https://en.wikipedia.org/wiki/Tree_traversal
+   */
+  class DFSElementIterator(root: Element) extends Iterator[Element] {
+
+    private var node: Node = root
+    private var stack: util.ArrayList[Node] = new util.ArrayList[Node]()
+
+    override def hasNext: Boolean = node ne null
+
+    override def next(): Element = {
+      getSiblingNodes(node).find(_.isInstanceOf[Element]) match {
+        case Some(sibling) => stack.add(sibling)
+        case None =>
+      }
+      val cur = node
+      node = node.childNodes().asScala.find(_.isInstanceOf[Element]) match {
+        case Some(x) => x
+        case None =>
+          if (!stack.isEmpty) {
+            stack.remove(stack.size() - 1)
+          } else {
+            null
+          }
+      }
+      cur.asInstanceOf[Element]
+    }
+  }
+
+  def dfsTraverse(e: Element): Iterator[Element] = new DFSElementIterator(e)
 
   /**
    * 以 BFS 遍历 DOM
@@ -144,6 +173,8 @@ object Selectors {
       res
     }
   }
+
+  def bfsTraverse(e: Element): Iterator[Element] = new BFSElementIterator(e)
 
   def buildIdCache(el: Element): Map[String, Element] = dfsTraverse(el).filter(_.hasAttr("id")).map(e => e.id() -> e).toMap
 }

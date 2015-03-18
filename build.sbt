@@ -4,7 +4,7 @@ name := "ssoup"
 
 description := "Scala CSS Selector DSL based on jsoup"
 
-version in Global := "0.2"
+version in Global := "0.3"
 
 licenses in Global := Seq("3-clause BSD" -> url("http://opensource.org/licenses/BSD-3-Clause"))
 
@@ -24,17 +24,15 @@ lazy val root = project.in(file(".")).dependsOn(macros % "compile-internal, test
   mappings in (Compile, packageSrc) ++= mappings.in(macros, Compile, packageSrc).value
 )
 
+lazy val jmh = project.in(file("jmh")).dependsOn(root)
+
 libraryDependencies ++= Seq(
   "org.jsoup" % "jsoup" % "1.8.1"
 )
 
 libraryDependencies ++= Seq(
-  "com.storm-enroute" %% "scalameter" % "0.6" % "test"
+  "org.scalatest" %% "scalatest" % "2.2.4" % "test"
 )
-
-testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework")
-
-parallelExecution in Test := false
 
 publishTo := {
   val nexus = "https://oss.sonatype.org/"

@@ -3,7 +3,7 @@
 ## Install
 
 ```
-"info.henix" % "ssoup" % "0.2"
+"info.henix" % "ssoup" % "0.3"
 ```
 
 ## Example
@@ -37,3 +37,13 @@ Find all elements that match the selector.
 ### select1(Iterator[Element]): Element
 
 Find the first element that matches the selector. This macro will generate friendly error message which include the selector.
+
+## Performance Consideration
+
+In contrast to many selectors implementations, ssoup implement selectors in a more direct way. This means:
+
+* `>` will iterate element's children
+* `~` will iterate element's siblings
+* `>>` and `|>>` will traverse element's all descendants
+
+So you should avoid using more than one `>>` or `|>>` in a select / select1 call.
