@@ -121,9 +121,11 @@ object Selectors {
     override def hasNext: Boolean = node ne null
 
     override def next(): Element = {
-      getSiblingNodes(node).find(_.isInstanceOf[Element]) match {
-        case Some(sibling) => stack.add(sibling)
-        case None =>
+      if (node ne root) {
+        getSiblingNodes(node).find(_.isInstanceOf[Element]) match {
+          case Some(sibling) => stack.add(sibling)
+          case None =>
+        }
       }
       val cur = node
       node = node.childNodes().asScala.find(_.isInstanceOf[Element]) match {

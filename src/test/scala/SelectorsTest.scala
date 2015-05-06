@@ -18,8 +18,9 @@ class SelectorsTest extends FunSuite with Matchers {
   def dfsTraverseRefImpl(e: Element): Iterator[Element] = Iterator.single(e) ++ Selectors.getChilds(e).flatMap(dfsTraverseRefImpl)
 
   test("dfsTraverse should traverse elements in exactly the same order of ref impl") {
-    val refList = dfsTraverseRefImpl(doc).toArray
-    val list = Selectors.dfsTraverse(doc).toArray
+    val page = doc.getElementById("a-page")
+    val refList = dfsTraverseRefImpl(page).toArray
+    val list = Selectors.dfsTraverse(page).toArray
 
     list.length should be (refList.length)
     for (i <- 0 until list.length) {

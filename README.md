@@ -3,8 +3,10 @@
 ## Install
 
 ```
-"info.henix" % "ssoup" % "0.3"
+"info.henix" % "ssoup" % "0.4"
 ```
+
+* DO NOT use v0.3
 
 ## Example
 

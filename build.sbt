@@ -4,7 +4,7 @@ name := "ssoup"
 
 description := "Scala CSS Selector DSL based on jsoup"
 
-version in Global := "0.3"
+version in Global := "0.4"
 
 licenses in Global := Seq("3-clause BSD" -> url("http://opensource.org/licenses/BSD-3-Clause"))
 
@@ -27,7 +27,7 @@ lazy val root = project.in(file(".")).dependsOn(macros % "compile-internal, test
 lazy val jmh = project.in(file("jmh")).dependsOn(root)
 
 libraryDependencies ++= Seq(
-  "org.jsoup" % "jsoup" % "1.8.1"
+  "org.jsoup" % "jsoup" % "1.8.2"
 )
 
 libraryDependencies ++= Seq(
