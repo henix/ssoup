@@ -4,11 +4,11 @@ name := "ssoup"
 
 description := "Scala CSS Selector DSL based on jsoup"
 
-version in Global := "0.4"
+version in Global := "0.4.1"
 
 licenses in Global := Seq("3-clause BSD" -> url("http://opensource.org/licenses/BSD-3-Clause"))
 
-scalaVersion in Global := "2.11.4"
+scalaVersion in Global := "2.11.7"
 
 scalacOptions in Global ++= Seq("-deprecation", "-feature", "-Yno-adapted-args")
 
@@ -27,11 +27,11 @@ lazy val root = project.in(file(".")).dependsOn(macros % "compile-internal, test
 lazy val jmh = project.in(file("jmh")).dependsOn(root)
 
 libraryDependencies ++= Seq(
-  "org.jsoup" % "jsoup" % "1.8.2"
+  "org.jsoup" % "jsoup" % "1.8.3"
 )
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "2.2.4" % "test"
+  "org.scalatest" %% "scalatest" % "2.2.5" % "test"
 )
 
 publishTo := {

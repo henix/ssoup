@@ -60,7 +60,7 @@ object Selectors {
     /**
      * 删除时必须先转成 List，拿到全部元素后才能删除。如果一边遍历一边删除，会导致 ConcurrentModificationException
      */
-    def remove(): Unit = elements.toList.foreach(_.remove())
+    def remove(): Unit = elements.toList.iterator.filter(_.parentNode() != null).foreach(_.remove())
   }
 
   /**
