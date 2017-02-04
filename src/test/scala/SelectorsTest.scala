@@ -23,7 +23,7 @@ class SelectorsTest extends FunSuite with Matchers {
     val list = Selectors.dfsTraverse(page).toArray
 
     list.length should be (refList.length)
-    for (i <- 0 until list.length) {
+    for (i <- list.indices) {
       list(i) should be theSameInstanceAs refList(i)
     }
   }
