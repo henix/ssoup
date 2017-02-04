@@ -22,6 +22,10 @@ val $ = Selectors.buildIdCache(document)
 val footer = $("footer")
 ```
 
+## Notice
+
+* Structural selectors not allowed in string parameters: `select(body > "#page > #nav")` won't do what you expect. String parameters only allow selectors for a single HTML element.
+
 ## Supported structural selectors
 
 * `>` : child
