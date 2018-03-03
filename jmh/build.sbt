@@ -1,3 +1,3 @@
 name := "ssoup-jmh"
 
-jmhSettings
+enablePlugins(JmhPlugin)
